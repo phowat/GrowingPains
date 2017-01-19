@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	public float sizeJumps; 
+	public float sizeJumps, speed;
+	private Rigidbody rb;
+
+
+	void Start() {
+		rb = GetComponent<Rigidbody> ();
+	
+	}
 
 	void FixedUpdate () {
 
@@ -27,5 +34,12 @@ public class PlayerController : MonoBehaviour {
 			);
 		}
 		transform.localScale = newScale;
+
+
+
+		float moveHorizontal = Input.GetAxis ("Horizontal");
+		float moveVertical = Input.GetAxis ("Vertical");
+		Vector3 movement = new Vector3 (moveHorizontal, 0, moveVertical);
+		rb.AddForce (movement * speed);
 	}
 }
